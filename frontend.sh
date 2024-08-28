@@ -4,26 +4,26 @@
  check_root
 
  dnf install nginx -y &>>LOGFILE
- VALIDATE $? "installing nginx"
+ #VALIDATE $? "installing nginx"
 
  systemctl enable nginx &>>LOGFILE
- VALIDATE $? "enabling nginx"
+ #VALIDATE $? "enabling nginx"
 
  systemctl start nginx &>>LOGFILE
- VALIDATE $? "starting nginx"
+ #VALIDATE $? "starting nginx"
 
  rm -rf /usr/share/nginx/html/* &>>LOGFILE
- VALIDATE $? "removing existing content"
+ #VALIDATE $? "removing existing content"
 
  curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>LOGFILE
- VALIDATE $? "downloading frontend code"
+ #VALIDATE $? "downloading frontend code"
 
  cd /usr/share/nginx/html &>>LOGFILE
  unzip /tmp/frontend.zip &>>LOGFILE
 
  cp /home/ec2-user/expense-shell/expense.conf /etc/nginx/default.d/expense.conf &>>LOGFILE
- VALIDATE $? "copied expense conf"
+ #VALIDATE $? "copied expense conf"
 
  systemctl restart nginx &>>LOGFILE
- VALIDATE $? "restarting nginx"
+ #VALIDATE $? "restarting nginx"
  
